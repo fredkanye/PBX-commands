@@ -1,0 +1,5 @@
+# automate the file removal process (no archiving needed), you can add the following to a cronjob (removes files older than two weeks at 1:15 AM each day)
+15 1 * * * find /var/spool/asterisk/monitor/ -type f -mtime +14 -exec rm -f {} \; >/dev/null 2>&1
+#remove files older than 60 days
+find /var/spool/asterisk/monitor/ -type f -mtime +60 -exec rm -f {} \;
+
