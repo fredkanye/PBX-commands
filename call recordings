@@ -3,3 +3,15 @@
 #remove files older than 60 days
 find /var/spool/asterisk/monitor/ -type f -mtime +60 -exec rm -f {} \;
 
+#How to fix CDR reports not working?
+asterisk -rx"module reload cdr_adaptive_odbc.so"
+asterisk -rx"cdr show status"
+#Calls outbound tracking and Recording
+#Check the diaplan recorded in: 
+/usr/src/asternic-stats-pro-2.2.6/FreePBX/extensions_custom_asternic_outbound_freepbx.conf
+#Copy the file into /etc/asterisk
+cp /usr/src/asternic-stats-pro-2.2.6/FreePBX/extensions_custom_asternic_outbound_freepbx.conf /etc/asterisk
+#Include the diaplan into Asterisk /etc/asterisk/extensions_custom.conf
+#include extensions_custom_asternic_outbound_freepbx.conf
+#Restart Asterisk diaplan
+asterisk -rx "dialplan reload"
